@@ -10,7 +10,7 @@ export default NextAuth({
     }),
   ],
 
-  secret: '2+xFJAjpDU+PGrRYo3404Cp04OTy6wo7MpeTghdNxN0=',
+  secret: process.env.NEXTAUTH_SECRET,
 
   callbacks: {
     redirect() {
