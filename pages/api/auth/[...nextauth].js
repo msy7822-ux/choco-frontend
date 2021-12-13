@@ -10,6 +10,8 @@ export default NextAuth({
     }),
   ],
 
+  secret: '2+xFJAjpDU+PGrRYo3404Cp04OTy6wo7MpeTghdNxN0=',
+
   callbacks: {
     redirect() {
       return '/';
