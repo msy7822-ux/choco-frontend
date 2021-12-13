@@ -23,7 +23,7 @@ export default NextAuth({
     async session({ session, token }) {
       session.token = token;
       console.log('session info ', session);
-      // await axios.post(`/users?token=${token?.id_token}`, { params: { session: session } });
+      await axios.post(`/users?token=${token?.id_token}`, { params: { session: session } });
       return session;
     }
   }
