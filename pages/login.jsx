@@ -1,6 +1,6 @@
 import { signIn } from 'next-auth/react';
 import { Layout } from '../components/Layout';
-import { Button, Box, Text, Image, Flex } from '@chakra-ui/react';
+import { Button, Box, Text, Image, Center } from '@chakra-ui/react';
 import { FcGoogle } from 'react-icons/fc';
 import { GrStatusWarning } from 'react-icons/gr';
 import { useMediaQuery } from "react-responsive";
@@ -14,19 +14,18 @@ const Login = () => {
         <Layout>
           <Box mt="10rem" textAlign="center">
             <Text
-              fontSize="1.2rem"
-              color="#848484"
+              fontSize="1.5rem"
+              mb="1rem"
+              color="#9F9F9F"
+              textAlign="center"
             >
               学生のためのフリマサイト
             </Text>
-            <Flex>
+            <Center w="100%" textAlign="center">
               <Image
-                mt="1.2rem"
-                ml="1.2rem"
                 pr="1"
-                color="#848484"
+                color="#6c6c6c"
                 h="5rem"
-                w="5rem"
                 src="/danball_icon.svg"
                 alt="アイコン"
               />
@@ -37,7 +36,7 @@ const Login = () => {
               >
                 Choco
               </Text>
-            </Flex>
+            </Center>
             <Text
               fontSize="1.1rem"
               color="#848484"
