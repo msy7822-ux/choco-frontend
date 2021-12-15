@@ -11,7 +11,7 @@ import {
 } from "@apollo/client";
 
 const httpLink = createHttpLink({
-  uri: `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
+  uri: `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql?apollo=true`,
 });
 
 const authLink = setContext((_, { headers }) => {
