@@ -25,12 +25,12 @@ export default NextAuth({
     async session({ session, token }) {
       session.token = token;
       console.log('session info ', session);
-      // await axios.post('/users', {
+      // await axios.post('/users', { params: { session: session } }, {
       //   headers: {
-      //     authorization: token?.id_token,
-      //   },
-      //   params: { session: session }
+      //     Authorization: token?.id_token
+      //   }
       // });
+
       return session;
     }
   }
