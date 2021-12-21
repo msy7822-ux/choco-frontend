@@ -11,10 +11,8 @@ export default function Home() {
   const [merchandises, setMerchandises] = useState([]);
   const [hasNextPage, setHasNextPage] = useState(false);
   const {ref, inView} = useInView();
-  const [fetchCount, setFetchCount] = useState(0);
 
   const handleOnCompleted = (data) => {
-    setFetchCount(fetchCount + 1);
     if (data?.merchandises?.edges) {
       const fetchedMerchandiseIds = data.merchandises.edges.map((merch) => { return merch.node.id });
       const merchandisesIds = merchandises.map((merch) => { return merch?.node?.id });
@@ -34,31 +32,20 @@ export default function Home() {
     },
   );
 
-  const fetchMorePage = () => {
-    setLastCursor(data.merchandises.pageInfo.endCursor);
-    refetch();
-    // fetchMore(MERCHANDISES, {
-    //   variables: { endCursor: lastCursor },
-    //   onCompleted: () => handleOnCompleted(data),
-    // });
+  const fetchMorePage = async () => {
+    setLastCursor(data?.merchandises?.pageInfo?.endCursor);
+    await fetchMore(MERCHANDISES, {
+      variables: { endCursor: lastCursor },
+      onCompleted: () => handleOnCompleted(data),
+    });
   };
-
-  // マウント時にフェッチを実行する
-  useEffect(() => {
-    refetch();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     if (inView) {
-      console.log('inView is ', inView);
       fetchMorePage();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
-
-  console.log('fetch count is ', fetchCount);
-  console.log('endCursor is ', lastCursor);
 
   return (
     <>
@@ -83,9 +70,10 @@ export default function Home() {
                 );
               })
             }
+            <Box ref={ref}/>
           </ImageList>
-          <Box ref={ref} sx={{ mb: '5rem' }}/>
           <button disabled={!hasNextPage} onClick={fetchMorePage}>さらに読み込む</button>
+          <Box sx={{ mb: '6rem' }}/>
         </Box>
       </Layout>
     </>

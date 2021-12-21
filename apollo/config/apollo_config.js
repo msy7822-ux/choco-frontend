@@ -37,17 +37,18 @@ const authLink = setContext((_, { headers }) => {
   }
 });
 
-// config for makeVar
-export const localMerchandises = makeVar([]);
-
 // apollo cache init config
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
         merchandises: {
-          merge(existing = [], incoming) {
-            return { ...existing, ...incoming };
+          merge() {
+            return {};
+          },
+
+          read(existing) {
+            return existing;
           },
         }
       }
@@ -57,10 +58,12 @@ const cache = new InMemoryCache({
 
 // apollo persist cache
 export const doPersistCache = async () => {
-  return await persistCache({
-    cache,
-    storage: new LocalStorageWrapper(window.localStorage),
-  });
+    if (typeof window !== 'undefined') {{
+      return await persistCache({
+        cache,
+        storage: new LocalStorageWrapper(window.localStorage),
+      });
+  }}
 }
 
 // apollo client initialize
