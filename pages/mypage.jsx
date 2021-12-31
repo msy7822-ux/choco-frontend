@@ -25,6 +25,7 @@ const Mypage = () => {
   const [pageLoading, setPageLoading] = useState(true);
 
   const { data, loading } = useQuery(MYSELF, {
+    fetchPolicy: "network-only",
     onError: (error) => {
       console.log('errorの内容', error);
       if (error.message === 'ログインが見当たりません。') {

@@ -12,7 +12,10 @@ export const MERCHANDISES = gql`
           id,
           title,
           price,
-          image
+          merchandiseImages {
+            id,
+            url
+          }
         }
       }
     }

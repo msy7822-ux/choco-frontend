@@ -1,10 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import { Box } from "@mui/material";
+import { useRouter } from "next/router";
 
 export const Header = () => {
+  const router = useRouter();
   return (
     <>
       <Box
+        onClick={() => {
+          router.push('/');
+        }}
         sx={{
           display: 'flex',
           justifyContent: 'center',

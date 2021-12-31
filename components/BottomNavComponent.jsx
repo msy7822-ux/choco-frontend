@@ -50,6 +50,9 @@ export const BottomNavComponent = () => {
           <BottomNavigationAction
             label="出品"
             icon={<FaCamera color="#818181" size="35" />}
+            onClick={() => {
+              router.replace('/listing');
+            }}
           />
           <BottomNavigationAction
             label="マイページ"
