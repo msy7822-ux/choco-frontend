@@ -1,10 +1,10 @@
 import { setContext } from '@apollo/client/link/context';
 import { persistCache, LocalStorageWrapper } from 'apollo3-cache-persist';
+import { createUploadLink } from "apollo-upload-client";
 import {
   ApolloClient,
   InMemoryCache,
   createHttpLink,
-  makeVar,
 } from "@apollo/client";
 
 // apollo client default options
@@ -22,7 +22,10 @@ const defaultOptions = {
   },
 }
 
-const httpLink = createHttpLink({
+// const httpLink = createHttpLink({
+//   uri: `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql?apollo=true`,
+// });
+const httpLink = createUploadLink({
   uri: `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql?apollo=true`,
 });
 

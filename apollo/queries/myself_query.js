@@ -8,10 +8,7 @@ export const MYSELF = gql`
       image,
       evaluation,
       listedMerchandises {
-        id,
-        title,
-        price,
-        image
+        id
       }
     }
   }

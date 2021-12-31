@@ -2,11 +2,19 @@
 import { Layout } from "../components/Layout";
 import { useQuery } from "@apollo/client";
 import { MERCHANDISES } from "../apollo/queries/merchandises_query";
-import { Box, ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useInView } from 'react-intersection-observer';
+import { useRouter } from 'next/router';
+import {
+  Box,
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+  Button,
+} from "@mui/material";
 
 export default function Home() {
+  const router = useRouter();
   const [lastCursor, setLastCursor] = useState('null');
   const [merchandises, setMerchandises] = useState([]);
   const [hasNextPage, setHasNextPage] = useState(false);
@@ -40,6 +48,12 @@ export default function Home() {
     });
   };
 
+  // マウント時にフェッチする
+  useEffect(() => {
+    refetch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     if (inView) {
       fetchMorePage();
@@ -55,16 +69,20 @@ export default function Home() {
             {merchandises !== [] &&
               merchandises.map((merchandise, key) => {
                 return (
-                  <ImageListItem key={key}>
+                  <ImageListItem
+                    key={key}
+                    onClick={() => router.push(`/merchandises/detail?id=${merchandise.node.id}`)}
+                  >
                     <img
-                      src={merchandise.node.image}
+                      // トップページには複数の画像の一枚目を掲載する
+                      src={merchandise.node.merchandiseImages.length !== 0 ? merchandise.node.merchandiseImages[0].url : '/noimage.png'}
                       alt={merchandise.node.title}
                       loading="lazy"
                     />
                     <ImageListItemBar
                       sx={{ padding: 0, margin: 0 }}
-                      title={merchandise.node.title}
-                      subtitle={`¥4000 ${merchandise.node.id}`}
+                      title={`No.${merchandise.node.id} ${merchandise.node.title}`}
+                      subtitle={`¥${merchandise.node.price}`}
                     />
                   </ImageListItem>
                 );
@@ -72,7 +90,13 @@ export default function Home() {
             }
             <Box ref={ref}/>
           </ImageList>
-          <button disabled={!hasNextPage} onClick={fetchMorePage}>さらに読み込む</button>
+          <Button
+            disabled={!hasNextPage}
+            onClick={fetchMorePage}
+            variant="contained"
+          >
+            さらに読み込む
+          </Button>
           <Box sx={{ mb: '6rem' }}/>
         </Box>
       </Layout>
