@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from "next/router";
 import { useEffect, useState, useRef } from 'react';
-import { Layout } from '../../components/Layout';
+import { LayoutComponent } from '../../components/templates/LayoutComponent';
 import { useQuery, useMutation } from "@apollo/client";
 import { Box, Button } from "@mui/material";
 import { FaHeart, FaComments } from 'react-icons/fa';
@@ -78,7 +78,7 @@ const MerchandiseDetail = () => {
 
   return (
     <>
-      <Layout>
+      <LayoutComponent>
         {/* 画像スライダー */}
           <Box sx={{ mt: '1rem', mb: '2rem', mx: '2rem' }}>
             <Swiper
@@ -244,7 +244,7 @@ const MerchandiseDetail = () => {
         }
         </Box>
         <Box sx={{ mb: '7rem' }} />
-      </Layout>
+      </LayoutComponent>
     </>
   );
 }

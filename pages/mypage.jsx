@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Layout } from "../components/Layout";
+import { LayoutComponent } from "../components/templates/LayoutComponent";
 import { useQuery } from '@apollo/client';
 import { MYSELF } from '../apollo/queries/myself_query';
 import { useLayoutEffect, useState } from "react";
@@ -49,7 +49,7 @@ const Mypage = () => {
 
   return (
     <>
-      <Layout>
+      <LayoutComponent>
         <Box sx={{ mt: '2rem' }}>
           {/* プロフィール部分 */}
           <Box sx={{ display: 'flex', justifyContent: 'center', mb: '2rem' }}>
@@ -107,7 +107,7 @@ const Mypage = () => {
             </li>
           </ul>
         </Box>
-      </Layout>
+      </LayoutComponent>
     </>
   );
 };

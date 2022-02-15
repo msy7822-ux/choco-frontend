@@ -18,4 +18,4 @@ export const departments = [
   {id: 16, ja: '理工学部'},
   {id: 17, ja: '建築学部'},
   {id: 18, ja: 'その他'},
-]
+];

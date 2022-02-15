@@ -4,6 +4,8 @@ import { getSession } from 'next-auth/react';
 import { ApolloProvider } from "@apollo/client";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { apolloClient, doPersistCache } from '../apollo/config/apollo_config';
+import 'tailwindcss/tailwind.css';
+import { ContextProviders } from '../Contexts/ContextProviders';
 
 const theme = createTheme();
 
@@ -19,13 +21,16 @@ function MyApp({ Component, pageProps, session }) {
     <SessionProvider session={session}>
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
+          <ContextProviders>
+            <Component {...pageProps} />
+          </ContextProviders>
         </ThemeProvider>
       </ApolloProvider>
     </SessionProvider>
   );
 }
 
+// nextAuthからSSRでセッションデータを取得する
 MyApp.getInitialProps = async ({ ctx }) => {
   const session = await getSession(ctx);
   return { session: session }

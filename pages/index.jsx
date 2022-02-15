@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Layout } from "../components/Layout";
+import { LayoutComponent } from "../components/templates/LayoutComponent";
 import { useQuery } from "@apollo/client";
 import { MERCHANDISES } from "../apollo/queries/merchandises_query";
 import { useState, useEffect } from "react";
@@ -63,7 +63,7 @@ export default function Home() {
 
   return (
     <>
-      <Layout>
+      <LayoutComponent>
         <Box sx={{ mx: 1 }}>
           <ImageList cols={2}>
             {merchandises !== [] &&
@@ -99,7 +99,7 @@ export default function Home() {
           </Button>
           <Box sx={{ mb: '6rem' }}/>
         </Box>
-      </Layout>
+      </LayoutComponent>
     </>
   )
 }
