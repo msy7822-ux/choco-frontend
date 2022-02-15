@@ -1,15 +1,21 @@
 import { InputComponent } from '../atoms/inputComponent';
 import { LabelTextComponent } from '../atoms/LabelTextComponent';
 import { calculateFeeAndProfit } from '../../utils/functions/calculateFeeAndProfit';
+import { confirmInvalidFormElement } from '../../utils/functions/confirmInvalidFormElement';
 
-export const PriceInputFieldComponent = ({ price, className, onChange }) => {
+export const PriceInputFieldComponent = ({
+  price,
+  className,
+  onChange,
+  details,
+}) => {
   const {fee, profit} = calculateFeeAndProfit(price);
 
   return (
     <div className={className}>
       <LabelTextComponent
-        text='・販売価格(300 ~ 9,999,999)'
-        className='text-left text-[#818181] mx-[10%] mt-5 w-[80%]'
+        text='・商品価格(300 ~ 9,999,999)'
+        className={`text-left text-[#818181] mx-[10%] mt-5 w-[80%] ${confirmInvalidFormElement(details, '商品価格') ? 'text-[#dd2828]' : 'text-[#818181]'}`}
       />
       <InputComponent
         type='number'

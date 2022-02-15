@@ -18,6 +18,7 @@ import { LabelTextComponent } from '../atoms/LabelTextComponent';
 import { CREATE_MERCHANDISE } from '../../apollo/queries/create_merchandise_mutation';
 // ====== functions ======
 import { handleCreateMerchandise } from '../../utils/functions/onClickCallbacks/listingFormsComponentFunctions';
+import { confirmInvalidFormElement } from '../../utils/functions/confirmInvalidFormElement';
 import {
   handleChangeDepartment,
   handleChangeMerchandiseCondition,
@@ -29,7 +30,7 @@ import {
 export const ListingFormsComponent = ({ className }) => {
   const { status: loginStatus } = useSession();
   const { images } = useContext(MerchandiseImagesContext)
-  const { setIsInvalid, setDetails } = useContext(MerchandiseIsInvalidContext);
+  const { setIsInvalid, setDetails, details } = useContext(MerchandiseIsInvalidContext);
 
   const [createMerchandiseMutation] = useMutation(CREATE_MERCHANDISE)
 
@@ -48,7 +49,7 @@ export const ListingFormsComponent = ({ className }) => {
 
       <LabelTextComponent
         text='・学部を選択'
-        className='text-left text-[#818181] mx-[10%] mt-6 w-[80%]'
+        className={`text-left mx-[10%] mt-6 w-[80%] ${confirmInvalidFormElement(details, '学部') ? 'text-[#dd2828]' : 'text-[#818181]'}`}
       />
       <DepartmentSelectBoxComponent
         onChange={(event) => handleChangeDepartment(event, setDepartmentId)}
@@ -57,7 +58,7 @@ export const ListingFormsComponent = ({ className }) => {
 
       <LabelTextComponent
         text='・商品の状態を選択'
-        className='text-left text-[#818181] mx-[10%] mt-5 w-[80%]'
+        className={`text-left text-[#818181] mx-[10%] mt-5 w-[80%] ${confirmInvalidFormElement(details, '商品の状態') ? 'text-[#dd2828]' : 'text-[#818181]'}`}
       />
       <MerchandiseStatusSelectBoxComponent
         onChange={(event) => handleChangeMerchandiseCondition(event, setCondition)}
@@ -66,7 +67,7 @@ export const ListingFormsComponent = ({ className }) => {
 
       <LabelTextComponent
         text='・商品名を入力'
-        className='text-left text-[#818181] mx-[10%] mt-5 w-[80%]'
+        className={`text-left text-[#818181] mx-[10%] mt-5 w-[80%] ${confirmInvalidFormElement(details, '商品名') ? 'text-[#dd2828]' : 'text-[#818181]'}`}
       />
       <InputComponent
         type='text'
@@ -77,7 +78,7 @@ export const ListingFormsComponent = ({ className }) => {
 
       <LabelTextComponent
         text='・商品の説明を入力'
-        className='text-left text-[#818181] mx-[10%] mt-5 w-[80%]'
+        className={`text-left text-[#818181] mx-[10%] mt-5 w-[80%] ${confirmInvalidFormElement(details, '商品の説明') ? 'text-[#dd2828]' : 'text-[#818181]'}`}
       />
       <TextareaComponent
         placeholder={`商品の説明\n(任意、1000文字まで)\n(商品の状態、定価、注意点など)\n\n例：2020年に大学の講義で使用した経済学の参考書です。基本的に半期の授業でしか使用していないので状態は非常に良いです。`}
@@ -88,6 +89,7 @@ export const ListingFormsComponent = ({ className }) => {
       <div className='mt-5'>
         <PriceInputFieldComponent
           price={price}
+          details={details}
           onChange={(event)=> handleChangePrice(event, setPrice)}
         />
       </div>
