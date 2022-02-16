@@ -9,7 +9,6 @@ export const ListingFormsComponentWrapper = () => {
   const { modalOpen, imageModalClose, openImage } = useContext(MerchandiseImagesModalOpenContext);
   // MEMO: detailsには、入力が不足している入力項目名が格納される
   const { isInvalid, details } = useContext(MerchandiseIsInvalidContext);
-  console.log(details.filter(Boolean))
 
   return (
     <>
