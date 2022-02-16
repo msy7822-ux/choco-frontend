@@ -15,7 +15,10 @@ export const ListingImageModalComponent = ({
   const { imageModalClose } = useContext(MerchandiseImagesModalOpenContext);
 
   return (
-    <ModalComponent isOpen={isOpen}>
+    <ModalComponent
+      isOpen={isOpen}
+      className='bg-[rgba(0,0,0,0.8)]'
+    >
       <div className='m-7'>
         { children }
       </div>

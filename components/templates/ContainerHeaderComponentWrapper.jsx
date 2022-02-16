@@ -4,8 +4,7 @@ import { useRouter } from "next/router";
 export const ContainerHeaderComponentWrapper = () => {
   const router = useRouter();
   const handleClickHeader = () => {
-    // router.push('/');
-    router.push('/test');
+    router.push('/');
   };
 
   return (

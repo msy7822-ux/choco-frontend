@@ -1,11 +1,13 @@
-// このファイルは後で削除する
-import { ContainerListingFormsComponent } from '../components/organisms/ContainerListingFormsComponent';
+// このファイルは後で消す
+import { ListingMerchandisesComponent } from '../components/organisms/ListingMerchandisesComponent';
+import { LayoutComponent } from '../components/templates/LayoutComponent';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const Test_ = () => {
   return (
-    <>
-      <ContainerListingFormsComponent />
-    </>
+    <LayoutComponent>
+      <ListingMerchandisesComponent/>
+    </LayoutComponent>
   )
 };
 
