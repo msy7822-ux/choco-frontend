@@ -35,12 +35,11 @@ export const ListingFormsComponentWrapper = () => {
         handleClose={imageModalClose}
         openImage={openImage}
       >
-        <div className='bg-white'>
-          <ImageComponent
-            src={openImage}
-            alt=''
-          />
-        </div>
+        <ImageComponent
+          src={openImage}
+          alt=''
+          className='w-[400px] h-[500px]'
+        />
       </ListingImageModalComponent>
     </>
   )

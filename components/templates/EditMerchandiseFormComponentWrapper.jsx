@@ -35,12 +35,11 @@ export const EditMerchandiseFormComponentWrapper = () => {
         handleClose={imageModalClose}
         openImage={openImage}
       >
-        <div className='bg-white'>
-          <ImageComponent
-            src={openImage}
-            alt=''
-          />
-        </div>
+        <ImageComponent
+          src={openImage}
+          alt=''
+          className='h-[500px] w-[400px]'
+        />
       </ListingImageModalComponent>
 
     </>
