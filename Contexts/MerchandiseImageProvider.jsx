@@ -1,9 +1,19 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useLayoutEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export const MerchandiseImagesContext = createContext();
 
 export const MerchandiseImagesContextProvider = ({ children }) => {
   const [images, setImages] = useState([]);
+  const router = useRouter();
+
+  // merchandiseInfo -> listingの時にimageのstateが残ってしまっている
+  useLayoutEffect(() => {
+    if (router.pathname === '/listing') {
+      setImages([]);
+      return;
+    }
+  }, [router.pathname])
 
   const addImages = (image) => {
     if (images.length === 4) {
@@ -24,7 +34,7 @@ export const MerchandiseImagesContextProvider = ({ children }) => {
   };
 
   return (
-    <MerchandiseImagesContext.Provider value={{ images, addImages, removeImage }}>
+    <MerchandiseImagesContext.Provider value={{ images, addImages, removeImage, setImages }}>
       { children }
     </MerchandiseImagesContext.Provider>
   )

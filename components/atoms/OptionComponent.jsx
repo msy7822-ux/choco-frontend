@@ -1,4 +1,4 @@
-export const OptionComponent = ({ children, value, className }) => {
+export const OptionComponent = ({ children, value, className, selected }) => {
   return (
     <option
       value={value}

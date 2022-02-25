@@ -4,6 +4,7 @@ export const SelectTagComponent = ({
   id,
   className,
   onChange,
+  defaultValue
 }) => {
   return (
     <select
@@ -11,6 +12,7 @@ export const SelectTagComponent = ({
       id={id}
       className={className}
       onChange={onChange}
+      defaultValue={defaultValue}
     >
       { children }
     </select>

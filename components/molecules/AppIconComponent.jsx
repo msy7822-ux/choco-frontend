@@ -17,9 +17,8 @@ export const AppIconComponent = ({
         />
         <TextComponent
           className={titleClasses}
-        >
-          Choco
-        </TextComponent>
+          text='Choco'
+        />
       </div>
     </>
   )

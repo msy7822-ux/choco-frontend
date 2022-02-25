@@ -1,15 +1,16 @@
 import { ContainerBottomNavComponentWrapper } from "./ContainerBottomNavComponentWrapper";
 import { ContainerHeaderComponentWrapper } from "./ContainerHeaderComponentWrapper";
 import HtmlHeadComponent from '../atoms/HtmlHeadComponent';
-// import { useMediaQuery } from "react-responsive";
-// import { useRouter } from 'next/router';
+import { useMediaQuery } from "react-responsive";
+import { NotDisplayComponent } from '../organisms/NotDisplayComponent';
 
 export const LayoutComponent = ({ children, className }) => {
-  // const router = useRouter();
-  // const isMobileScreen = useMediaQuery({ query: '(max-width: 400px)'});
+  const isMobileScreen = useMediaQuery({ query: '(max-width: 450px)'});
 
-  // if (!isMobileScreen) return (
-  // )
+  // TODO: ここのロジックは別に切り出したい
+  if (!isMobileScreen) {
+    return <NotDisplayComponent className='mt-[20%]' />;
+  }
 
   return (
     <div className={`p-0 m-0 ${className || ''}`} >

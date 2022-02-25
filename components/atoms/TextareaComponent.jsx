@@ -9,9 +9,9 @@ export const TextareaComponent = ({
   return (
     <>
       <textarea
-        value={value}
         cols={cols}
         rows={rows}
+        value={value && value !== '' ? value : ''}
         className={className}
         onChange={onChange}
         placeholder={placeholder}

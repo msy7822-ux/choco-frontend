@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 8080",
     "lint": "next lint"
   },
   "dependencies": {
@@ -16,6 +16,8 @@
     "@mui/icons-material": "^5.2.4",
     "@mui/material": "^5.2.4",
     "@mui/styles": "^5.2.3",
+    "@sentry/react": "^6.17.9",
+    "@sentry/tracing": "^6.17.9",
     "apollo-upload-client": "^17.0.0",
     "apollo3-cache-persist": "^0.13.0",
     "axios": "^0.24.0",
@@ -29,6 +31,7 @@
     "react-icons": "^4.3.1",
     "react-image-crop": "^9.0.5",
     "react-intersection-observer": "^8.33.1",
+    "react-loader-spinner": "^5.1.4",
     "react-responsive": "^9.0.0-beta.5",
     "react-stars": "^2.2.5",
     "react-webcam": "^6.0.0",

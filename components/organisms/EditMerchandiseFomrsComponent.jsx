@@ -19,6 +19,7 @@ import { CREATE_MERCHANDISE } from '../../apollo/queries/create_merchandise_muta
 // ====== functions ======
 import { useCreateMerchandise } from '../../hooks/useCreateMerchandise';
 import { confirmInvalidFormElement } from '../../utils/functions/confirmInvalidFormElement';
+import { useFetchMerchandiseInfo } from '../../hooks/useFetchMerchandsieInfo';
 import {
   handleChangeDepartment,
   handleChangeMerchandiseCondition,
@@ -27,21 +28,29 @@ import {
   handleChangePrice,
 } from '../../utils/functions/onChangeCallbacks/listingFormsComponentFunctions';
 
-export const ListingFormsComponent = ({ className }) => {
+export const EditMerchandiseFormsComponent = ({ className }) => {
   const { status: loginStatus } = useSession();
   const { images } = useContext(MerchandiseImagesContext)
   const { setIsInvalid, setDetails, details } = useContext(MerchandiseIsInvalidContext);
 
+  const {
+    department,
+    condition: conditionVal,
+    title: titleVal,
+    description: descriptionVal,
+    price: priceVal
+  } = useFetchMerchandiseInfo();
+
   const [createMerchandiseMutation] = useMutation(CREATE_MERCHANDISE)
 
-  const [departmentId, setDepartmentId] = useState(0);
-  const [condition, setCondition] = useState(0);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState(0);
+  const [departmentId, setDepartmentId] = useState(department?.id);
+  const [condition, setCondition] = useState(conditionVal);
+  const [title, setTitle] = useState(titleVal);
+  const [description, setDescription] = useState(descriptionVal);
+  const [price, setPrice] = useState(priceVal);
   const publicStatus = useRef(null);
 
-  const { createMerchandise } = useCreateMerchandise(title, description, price, condition, departmentId, publicStatus, images, loginStatus, setIsInvalid, setDetails, createMerchandiseMutation)
+  const { createMerchandise } = useCreateMerchandise(title, description, price, condition, departmentId, publicStatus,images, loginStatus, setIsInvalid, setDetails, createMerchandiseMutation);
 
   return (
     <div className={`text-center ${className || ''}`}>
@@ -54,8 +63,9 @@ export const ListingFormsComponent = ({ className }) => {
         className={`text-left mx-[10%] mt-6 w-[80%] ${confirmInvalidFormElement(details, '学部') ? 'text-[#dd2828]' : 'text-[#818181]'}`}
       />
       <DepartmentSelectBoxComponent
+        value={parseInt(departmentId, 10)}
         onChange={(event) => handleChangeDepartment(event, setDepartmentId)}
-        className='form-select m-auto w-[80%] text-[#818181] block appearance-none bg-white border border-[#818181] px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
+        className='form-select m-auto w-[80%] text-[#5e5d5d] block appearance-none bg-white border border-[#818181] px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
       />
 
       <LabelTextComponent
@@ -63,8 +73,9 @@ export const ListingFormsComponent = ({ className }) => {
         className={`text-left text-[#818181] mx-[10%] mt-5 w-[80%] ${confirmInvalidFormElement(details, '商品の状態') ? 'text-[#dd2828]' : 'text-[#818181]'}`}
       />
       <MerchandiseStatusSelectBoxComponent
+        value={condition}
         onChange={(event) => handleChangeMerchandiseCondition(event, setCondition)}
-        className='form-select m-auto w-[80%] text-[#818181] block appearance-none bg-white border border-[#818181] px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
+        className='form-select m-auto w-[80%] text-[#5e5d5d] block appearance-none bg-white border border-[#818181] px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
       />
 
       <LabelTextComponent
@@ -74,6 +85,7 @@ export const ListingFormsComponent = ({ className }) => {
       <InputComponent
         type='text'
         placeholder='商品名を入力してください'
+        value={title}
         onChange={(event) => handleChangeMerchandiseTitle(event, setTitle)}
         className='border-b-[1px] py-1 border-[#818181] m-auto w-[80%] focus:outline-none focus:shadow-outline'
       />
@@ -84,6 +96,7 @@ export const ListingFormsComponent = ({ className }) => {
       />
       <TextareaComponent
         placeholder={`商品の説明\n(任意、1000文字まで)\n(商品の状態、定価、注意点など)\n\n例：2020年に大学の講義で使用した経済学の参考書です。基本的に半期の授業でしか使用していないので状態は非常に良いです。`}
+        value={description}
         onChange={(event) => handleChangeMerchandiseDescription(event, setDescription)}
         className='border-b-[1px] border-[#818181] m-auto h-[200px] w-[80%] focus:outline-none focus:shadow-outline resize-none'
       />
@@ -98,10 +111,10 @@ export const ListingFormsComponent = ({ className }) => {
 
       <div className='mt-6'>
         <ButtonComponent
-          onClick={() => {createMerchandise()}}
+          // onClick={() => {createMerchandise()}}
           className='bg-blue-500 select-none w-[82%] text-white font-bold py-2 px-4 rounded-full'
         >
-          出品する
+          更新する
         </ButtonComponent>
       </div>
     </div>

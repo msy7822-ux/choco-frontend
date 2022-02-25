@@ -17,7 +17,10 @@ export const PriceInputFieldComponent = ({
         text='・商品価格(300 ~ 9,999,999)'
         className={`text-left text-[#818181] mx-[10%] mt-5 w-[80%] ${confirmInvalidFormElement(details, '商品価格') ? 'text-[#dd2828]' : 'text-[#818181]'}`}
       />
+
+      <span>￥</span>
       <InputComponent
+        value={price && price !== 0 ? price : 0}
         type='number'
         placeholder='価格をご記入ください'
         onChange={onChange}

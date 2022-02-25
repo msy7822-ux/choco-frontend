@@ -5,7 +5,7 @@ import {
   ApolloClient,
   InMemoryCache,
   createHttpLink,
-} from "@apollo/client";
+} from '@apollo/client';
 
 // apollo client default options
 const defaultOptions = {
@@ -31,11 +31,17 @@ const httpLink = createUploadLink({
 
 // create apollo link
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('token');
+  let token;
+
+  // ssrの時は100%ここの値がundefinedになるからfetchできない
+  if (typeof window !== 'undefined') {
+    token = localStorage.getItem('token');
+  }
+
   return {
     headers: {
       ...headers,
-      authorization: token && token !== 'undefined' ? token : "",
+      authorization: token && token !== 'undefined' ? token : '',
     }
   }
 });
@@ -61,16 +67,24 @@ const cache = new InMemoryCache({
 
 // apollo persist cache
 export const doPersistCache = async () => {
-    if (typeof window !== 'undefined') {{
-      return await persistCache({
-        cache,
-        storage: new LocalStorageWrapper(window.localStorage),
-      });
+  if (typeof window !== 'undefined') {{
+    return await persistCache({
+      cache,
+      storage: new LocalStorageWrapper(window.localStorage),
+    });
   }}
 }
 
 // apollo client initialize
 export const apolloClient = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: cache,
+  defaultOptions: defaultOptions,
+});
+
+// client for SSR
+export const apolloSsrClient = new ApolloClient({
+  ssrMode: true,
   link: authLink.concat(httpLink),
   cache: cache,
   defaultOptions: defaultOptions,

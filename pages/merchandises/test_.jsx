@@ -23,7 +23,6 @@ const MerchandiseDetail = () => {
   const router = useRouter();
   const merchandiseId = parseInt(router.query.id, 10);
   const [isFavorited, setIsFavorited] = useState(false);
-  const unmountFavorite = useRef(false);
 
   const { loading: merchandiseLoading, data, error } = useQuery(MERCHANDISE_DETAIL, {
     variables: { id: merchandiseId }

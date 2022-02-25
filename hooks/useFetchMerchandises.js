@@ -1,11 +1,13 @@
 import { useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { MERCHANDISES } from '../apollo/queries/merchandises_query';
+import { apolloSsrClient } from '../apollo/config';
 
 export const useFetchMerchandises = () => {
   // TODO: この関数はレンダリング毎に呼び出されているので修正したい
   const [lastCursor, setLastCursor] = useState('null');
   const [merchandises, setMerchandises] = useState([]);
+  const [hasNextPage, setHasNextPage] = useState(false);
 
   const handleOnCompleted = (data) => {
     if (data?.merchandises?.edges) {
@@ -16,6 +18,7 @@ export const useFetchMerchandises = () => {
         return;
       }
       setMerchandises([...merchandises, data.merchandises.edges].flat());
+      setHasNextPage(data?.merchandises?.pageInfo?.hasNextPage);
     }
   };
 
@@ -24,6 +27,8 @@ export const useFetchMerchandises = () => {
     {
       variables: { endCursor: lastCursor },
       notifyOnNetworkStatusChange: true,
+      ssr: true,
+      client: apolloSsrClient,
       onCompleted: () => handleOnCompleted(data),
     },
   );
@@ -40,7 +45,8 @@ export const useFetchMerchandises = () => {
   return {
     merchandises: merchandises,
     refetch: refetch,
-    fetchMorePage: fetchMorePage
+    fetchMorePage: fetchMorePage,
+    hasNextPage: hasNextPage
   };
 };
 

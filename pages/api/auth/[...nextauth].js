@@ -9,13 +9,15 @@ const nextAuthFunctionResult = NextAuth({
         clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET
       }),
     ],
-
+    session: {
+      strategy: 'jwt',
+    },
+    jwt: {
+      // detail -> https://next-auth.js.org/configuration/options
+      maxAge: 60 * 60 * 24 * 30,
+    },
     secret: process.env.NEXTAUTH_SECRET,
-
     callbacks: {
-      redirect() {
-        return '/';
-      },
       async jwt({ account, token }) {
         if (account) {
           token.id_token = account.id_token
@@ -32,6 +34,9 @@ const nextAuthFunctionResult = NextAuth({
         });
 
         return session;
+      },
+      redirect() {
+        return '/';
       }
     }
 });

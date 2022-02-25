@@ -7,12 +7,14 @@ export const InputComponent = ({
   placeholder,
   onChange,
   onSubmit,
+  value,
 }) => {
   return (
     <input
       type={type}
       accept={accept || ''}
       id={id}
+      value={value && value !== '' ? value : ''}
       name={name}
       placeholder={placeholder}
       className={className}
