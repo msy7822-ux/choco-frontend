@@ -38,7 +38,7 @@ export const ListingFormsComponentWrapper = () => {
         <ImageComponent
           src={openImage}
           alt=''
-          className='w-[400px] h-[500px]'
+          className='w-[400px] h-[500px] rounded'
         />
       </ListingImageModalComponent>
     </>

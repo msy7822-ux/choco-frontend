@@ -38,7 +38,7 @@ export const EditMerchandiseFormComponentWrapper = () => {
         <ImageComponent
           src={openImage}
           alt=''
-          className='h-[500px] w-[400px]'
+          className='h-[500px] w-[400px] rounded'
         />
       </ListingImageModalComponent>
 
