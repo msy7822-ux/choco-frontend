@@ -1,8 +1,8 @@
 import { createContext, useState } from 'react';
 
-export const MerchandiseImagesModalOpenContext = createContext();
+export const MerchandiseModalOpenContext = createContext();
 
-export const MerchandiseImageModalOpenProvider = ({ children }) => {
+export const MerchandiseModalOpenProvider = ({ children }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [openImage, setOpenImage] = useState('');
 
@@ -16,7 +16,7 @@ export const MerchandiseImageModalOpenProvider = ({ children }) => {
   };
 
   return (
-    <MerchandiseImagesModalOpenContext.Provider
+    <MerchandiseModalOpenContext.Provider
       value={{
         modalOpen,
         imageModalOpen,
@@ -26,6 +26,6 @@ export const MerchandiseImageModalOpenProvider = ({ children }) => {
       }}
     >
       { children }
-    </MerchandiseImagesModalOpenContext.Provider>
+    </MerchandiseModalOpenContext.Provider>
   )
 };

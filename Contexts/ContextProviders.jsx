@@ -1,20 +1,20 @@
 import { MerchandiseImagesContextProvider } from './MerchandiseImageProvider';
-import { MerchandiseImageModalOpenProvider } from './MerchandiseImageModalOpenProvider';
+import { MerchandiseModalOpenProvider } from './MerchandiseModalOpenProvider';
 import { MerchandiseIsInvalidProvider } from './MerchandiseIsInvalidProvider';
 import { UserIsFavoriteProvider } from './UserIsFavoriteProvider';
-import { MerchandiseInfoCommentModalOpenProvider } from './MerchandiseInfoCommentModalOpenProvider';
+import { MerchandiseInfoCommentModalOpenProvider } from './ModalOpenProvider';
 
 export const ContextProviders = ({ children }) => {
   return (
     <MerchandiseIsInvalidProvider>
       <MerchandiseImagesContextProvider>
-        <MerchandiseImageModalOpenProvider>
+        <MerchandiseModalOpenProvider>
           <UserIsFavoriteProvider>
             <MerchandiseInfoCommentModalOpenProvider>
               { children }
             </MerchandiseInfoCommentModalOpenProvider>
           </UserIsFavoriteProvider>
-        </MerchandiseImageModalOpenProvider>
+        </MerchandiseModalOpenProvider>
       </MerchandiseImagesContextProvider>
     </MerchandiseIsInvalidProvider>
   )

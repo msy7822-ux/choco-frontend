@@ -6,6 +6,7 @@ import { useFetchMerchandises } from '../../hooks/useFetchMerchandises';
 import { isEmptyArray } from '../../utils/functions/isEmptyArray';
 import { LinkComponent } from '../atoms/LinkComponent';
 
+
 export const ListingMerchandisesComponent = ({ className }) => {
   const {ref, inView} = useInView();
   const { merchandises, fetchMorePage, hasNextPage } = useFetchMerchandises();

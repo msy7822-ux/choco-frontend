@@ -19,7 +19,7 @@ import { CREATE_MERCHANDISE } from '../../apollo/queries/create_merchandise_muta
 // ====== functions ======
 import { useCreateMerchandise } from '../../hooks/useCreateMerchandise';
 import { confirmInvalidFormElement } from '../../utils/functions/confirmInvalidFormElement';
-import { useFetchMerchandiseInfo } from '../../hooks/useFetchMerchandsieInfo';
+import { useFetchMerchandiseInfo } from '../../hooks/useFetchMerchandiseInfo';
 import {
   handleChangeDepartment,
   handleChangeMerchandiseCondition,

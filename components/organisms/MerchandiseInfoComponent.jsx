@@ -1,6 +1,6 @@
 import { TextComponent } from '../atoms/TextComponent';
 import { LabelTextComponent } from '../atoms/LabelTextComponent';
-import { useFetchMerchandiseInfo } from '../../hooks/useFetchMerchandsieInfo';
+import { useFetchMerchandiseInfo } from '../../hooks/useFetchMerchandiseInfo';
 
 export const MerchandiseInfoComponent = () => {
   const { title, price, department } = useFetchMerchandiseInfo();

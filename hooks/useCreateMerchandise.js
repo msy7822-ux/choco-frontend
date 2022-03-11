@@ -1,7 +1,9 @@
 import { bundleMerchandiseValidations } from '../validations/Merchandise/createMerchandiseValidations';
 import { returnToTop } from '../utils/functions/returnToTop';
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { useCallback, useContext } from 'react';
+import { useSession } from 'next-auth/react';
+import { MerchandiseIsInvalidContext } from '../Contexts/MerchandiseIsInvalidProvider';
 
 export const useCreateMerchandise = (
   title,
@@ -11,17 +13,22 @@ export const useCreateMerchandise = (
   departmentId,
   publicStatus,
   images,
-  loginStatus,
-  setIsInvalid,
-  setDetails,
   createMerchandiseMutation,
 ) => {
   const router = useRouter()
+  const { status } = useSession();
+  const {
+    setIsInvalid,
+    setDetails,
+    setNotFoundLogin
+  } = useContext(MerchandiseIsInvalidContext);
+
   const createMerchandise = useCallback(() => {
     const { result: isValidMerchandise, details } = bundleMerchandiseValidations(title, description, price, condition, departmentId);
 
-    if (loginStatus == 'unauthenticated') {
+    if (status === 'unauthenticated' || status !== 'authenticated') {
       returnToTop();
+      setNotFoundLogin(true);
       router.push('/login')
       return;
     }
@@ -48,7 +55,7 @@ export const useCreateMerchandise = (
       router.push('/')
     })
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [condition, departmentId, description, loginStatus, price, title])
+  }, [condition, departmentId, description, status, price, title])
 
   return { createMerchandise: createMerchandise } ;
 };

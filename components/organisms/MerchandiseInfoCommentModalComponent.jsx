@@ -1,10 +1,18 @@
 import { ModalComponent } from '../atoms/ModalComponent';
-import { MerchandiseInfoCommentModalOpenContext } from '../../Contexts/MerchandiseInfoCommentModalOpenProvider';
-import { useContext } from 'react';
+import { ModalOpenContext } from '../../Contexts/ModalOpenProvider';
+import { useContext, useEffect } from 'react';
 import { ButtonComponent } from '../atoms/ButtonComponent';
 
 export const MerchandiseInfoCommentModalComponent = () => {
-  const { isOpen, commentModalClose } = useContext(MerchandiseInfoCommentModalOpenContext);
+  const { isOpen, commentModalClose } = useContext(ModalOpenContext);
+
+  // unmountの時に強制的にmodalを閉じる
+  useEffect(() => {
+    return () => {
+      commentModalClose();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return(
     <ModalComponent

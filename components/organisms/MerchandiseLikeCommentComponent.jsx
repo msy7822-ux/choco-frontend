@@ -1,9 +1,9 @@
-import { useFetchMerchandiseInfo } from '../../hooks/useFetchMerchandsieInfo';
+import { useFetchMerchandiseInfo } from '../../hooks/useFetchMerchandiseInfo';
 import { LikeIconComponent } from '../atoms/LikeIconComponent';
 import { CommentIconComponent } from '../atoms/CommentIconComponent';
 import { TextComponent } from '../atoms/TextComponent';
 import { userIsFavoriteContext } from '../../Contexts/UserIsFavoriteProvider';
-import { MerchandiseInfoCommentModalOpenContext } from '../../Contexts/MerchandiseInfoCommentModalOpenProvider';
+import { ModalOpenContext } from '../../Contexts/ModalOpenProvider';
 import { useContext } from 'react';
 import { useDoFavorite } from '../../hooks/useDoFavorite';
 import { useSession } from 'next-auth/react';
@@ -16,7 +16,7 @@ export const MerchandiseLikeCommentComponent = () => {
     unmountFavorite
   } = useContext(userIsFavoriteContext);
   const { description } = useFetchMerchandiseInfo();
-  const { commentModalOpen } = useContext(MerchandiseInfoCommentModalOpenContext);
+  const { commentModalOpen } = useContext(ModalOpenContext);
 
   // unmountのときにいいねをDBにサーバーに反映させる
   useDoFavorite(unmountFavorite.current);

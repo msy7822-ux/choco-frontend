@@ -1,10 +1,10 @@
 import { LeftAllowIconComponent } from '../atoms/LeftAllowIconComponent';
 import { RightArrowIconComponent } from '../atoms/RightAllowIconComponent';
-import { useFetchMerchandiseInfo } from '../../hooks/useFetchMerchandsieInfo';
+import { useFetchMerchandiseInfo } from '../../hooks/useFetchMerchandiseInfo';
 import { ImageComponent } from '../atoms/ImageComponent';
 
-const scrollStyleClasses = 'snap-always snap-center w-96 flex-shrink-0 h-full flex items-center justify-center';
 const scrollStyleWrapperClasses = 'snap-x mx-auto snap-mandatory h-[200px] flex w-96 overflow-scroll';
+const scrollStyleClasses = 'snap-always snap-center w-96 flex-shrink-0 h-full flex items-center justify-center';
 
 export const MerchandiseImagesSliderComponent  = () => {
   const { images } = useFetchMerchandiseInfo();
@@ -20,7 +20,7 @@ export const MerchandiseImagesSliderComponent  = () => {
                 <ImageComponent
                   src={image.url}
                   alt=''
-                  className='h-[180px] w-[180px] border rounded'
+                  className='h-[180px] w-[70%] border rounded'
                 />
               </div>
             )

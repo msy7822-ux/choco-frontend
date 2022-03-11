@@ -1,19 +1,10 @@
-import { useContext } from 'react';
 import { ModalComponent } from '../atoms/ModalComponent';
 import { ButtonComponent } from '../atoms/ButtonComponent';
-import { MerchandiseImagesContext } from '../../Contexts/MerchandiseImageProvider';
 import { MerchandiseModalOpenContext } from '../../Contexts/MerchandiseModalOpenProvider';
-import { handleClickRemoveImage } from '../../utils/functions/onClickCallbacks/listingImageModalComponentFunctions';
+import { useContext } from 'react';
 
-export const ListingImageModalComponent = ({
-  isOpen,
-  handleClose,
-  children,
-  openImage,
-}) => {
-  const { removeImage } = useContext(MerchandiseImagesContext);
-  const { imageModalClose } = useContext(MerchandiseModalOpenContext);
-
+export const ConfirmModalComponent = () => {
+  const { isOpen } = useContext(MerchandiseModalOpenContext);
   return (
     <ModalComponent
       isOpen={isOpen}

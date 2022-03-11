@@ -3,10 +3,10 @@ import { EditMerchandiseFormsComponent } from '../organisms/EditMerchandiseFomrs
 import { ImageComponent } from '../atoms/ImageComponent';
 import { useContext } from 'react';
 import { MerchandiseIsInvalidContext } from '../../Contexts/MerchandiseIsInvalidProvider';
-import { MerchandiseImagesModalOpenContext } from '../../Contexts/MerchandiseImageModalOpenProvider';
+import { MerchandiseModalOpenContext } from '../../Contexts/MerchandiseModalOpenProvider';
 
 export const EditMerchandiseFormComponentWrapper = () => {
-  const { modalOpen, imageModalClose, openImage } = useContext(MerchandiseImagesModalOpenContext);
+  const { modalOpen, imageModalClose, openImage } = useContext(MerchandiseModalOpenContext);
   // MEMO: detailsには、入力が不足している入力項目名が格納される
   const { isInvalid, details } = useContext(MerchandiseIsInvalidContext);
 

@@ -1,9 +1,9 @@
 export const handleChangeDepartment = (event, setDepartmentId) => {
-  setDepartmentId(event.target.value);
+  setDepartmentId(parseInt(event.target.value, 10));
 };
 
 export const handleChangeMerchandiseCondition = (event, setCondition) => {
-  setCondition(event.target.value);
+  setCondition(parseInt(event.target.value, 10));
 };
 
 export const handleChangeMerchandiseTitle = (event, setTitle) => {
@@ -19,5 +19,5 @@ export const handleChangePrice = (event, setPrice) => {
     setPrice(0);
     return;
   }
-  setPrice(event.target.value);
+  setPrice(parseInt(event.target.value, 10));
 };

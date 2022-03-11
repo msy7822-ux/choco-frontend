@@ -1,6 +1,6 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
-export const MerchandiseInfoCommentModalOpenContext = createContext();
+export const ModalOpenContext = createContext();
 
 export const MerchandiseInfoCommentModalOpenProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,10 +14,10 @@ export const MerchandiseInfoCommentModalOpenProvider = ({ children }) => {
   };
 
   return (
-    <MerchandiseInfoCommentModalOpenContext.Provider
+    <ModalOpenContext.Provider
       value={{ isOpen, commentModalOpen, commentModalClose }}
     >
       { children }
-    </MerchandiseInfoCommentModalOpenContext.Provider>
+    </ModalOpenContext.Provider>
   )
 };

@@ -29,7 +29,9 @@ export const useFetchMerchandises = () => {
       notifyOnNetworkStatusChange: true,
       ssr: true,
       client: apolloSsrClient,
-      onCompleted: () => handleOnCompleted(data),
+      onCompleted: (data) => {
+        handleOnCompleted(data)
+      },
     },
   );
 

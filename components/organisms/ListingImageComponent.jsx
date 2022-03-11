@@ -3,19 +3,19 @@ import { ImageUploaderComponent } from '../molecules/ImageUploadComponent';
 import { PhotoIconComponent } from '../atoms/PhotoIconComponent';
 import { useContext } from 'react';
 import { MerchandiseImagesContext } from '../../Contexts/MerchandiseImageProvider';
-import { MerchandiseImagesModalOpenContext } from '../../Contexts/MerchandiseImageModalOpenProvider';
+import { MerchandiseModalOpenContext } from '../../Contexts/MerchandiseModalOpenProvider';
 
-const ImageDisplayComponentClasses = 'text-[35px] border box-content p-3 mr-3 rounded-md text-[#848484]'
+const ImageDisplayComponentClasses = 'text-[35px] border box-content p-3 mr-3 rounded-md text-[#848484]';
 
 export const ListingImageComponent = ({ className }) => {
   const { images } = useContext(MerchandiseImagesContext);
-  const { imageModalOpen } = useContext(MerchandiseImagesModalOpenContext);
+  const { imageModalOpen } = useContext(MerchandiseModalOpenContext);
 
   // FIXME: jsxでfor文などを即時関数の中で記述すると、一度しか実行されないため、アイコンと画像との表示の切り替えが難しくなるので一旦ベタがき
   return (
     <ul className={`flex ${className}`}>
       <li>
-        {!images[0]
+        {images && !images[0]
           ? <PhotoIconComponent className={ImageDisplayComponentClasses} />
           : <div onClick={() => imageModalOpen(images[0])}>
               <ImageComponent
@@ -27,7 +27,7 @@ export const ListingImageComponent = ({ className }) => {
         }
       </li>
       <li>
-        {!images[1]
+        {images && !images[1]
           ? <PhotoIconComponent className={ImageDisplayComponentClasses} />
           : <div onClick={() => imageModalOpen(images[1])}>
               <ImageComponent
@@ -39,7 +39,7 @@ export const ListingImageComponent = ({ className }) => {
         }
       </li>
       <li>
-        {!images[2]
+        {images && !images[2]
           ? <PhotoIconComponent className={ImageDisplayComponentClasses} />
           : <div onClick={() => imageModalOpen(images[2])}>
               <ImageComponent
@@ -51,7 +51,7 @@ export const ListingImageComponent = ({ className }) => {
         }
       </li>
       <li>
-        {!images[3]
+        {images && !images[3]
           ? <ImageUploaderComponent />
           : <div onClick={() => imageModalOpen(images[3])}>
               <ImageComponent

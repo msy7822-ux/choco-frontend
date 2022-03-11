@@ -7,7 +7,7 @@ export const MerchandiseImagesContextProvider = ({ children }) => {
   const [images, setImages] = useState([]);
   const router = useRouter();
 
-  // merchandiseInfo -> listingの時にimageのstateが残ってしまっている
+  // merchandiseInfo -> listingの時にimageのstateが残ってしまっているのを空にする
   useLayoutEffect(() => {
     if (router.pathname === '/listing') {
       setImages([]);

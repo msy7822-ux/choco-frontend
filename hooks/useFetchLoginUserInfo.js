@@ -29,5 +29,5 @@ export const useFetchLoginUserInfo = () => {
   }, []);
 
   if (loading || pageLoading) return <>Loading...</>;
-  return { myself: data.myself };
+  return { myself: data?.myself };
 };

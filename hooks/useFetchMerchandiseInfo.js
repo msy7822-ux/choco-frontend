@@ -33,8 +33,8 @@ export const useFetchMerchandiseInfo = () => {
     fetchPolicy: 'no-cache',
     ssr: true,
     client: apolloSsrClient,
-    onCompleted: (data) => {
-      if (data?.favorite !== null) {
+    onCompleted: (res) => {
+      if (res?.favorite !== null) {
         setIsFavorite(true);
       }
     }
@@ -45,13 +45,13 @@ export const useFetchMerchandiseInfo = () => {
 
   return {
     id: merchandiseId,
-    title: data.merchandiseDetail.title,
-    description: data.merchandiseDetail.description,
-    price: data.merchandiseDetail.price,
-    images: data.merchandiseDetail.merchandiseImages,
-    department: data.merchandiseDetail.dividedDepartment.department,
-    condition: data.merchandiseDetail.condition,
-    seller: data.merchandiseDetail.seller,
+    title: data?.merchandiseDetail?.title,
+    description: data?.merchandiseDetail?.description,
+    price: data?.merchandiseDetail?.price,
+    images: data?.merchandiseDetail?.merchandiseImages,
+    department: data?.merchandiseDetail?.dividedDepartment?.department,
+    condition: data?.merchandiseDetail?.condition,
+    seller: data?.merchandiseDetail?.seller,
     isFavorite: isFavorite,
     sellerIsMe: sellerIsMe
   }
