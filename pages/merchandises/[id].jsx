@@ -8,6 +8,7 @@ import { ButtonComponent } from '../../components/atoms/ButtonComponent';
 import { useSession } from 'next-auth/react';
 import { useFetchMerchandiseInfo } from '../../hooks/useFetchMerchandiseInfo';
 import { useRouter } from 'next/router';
+import { useDeleteMerchandise } from '../../hooks/useDeleteMerchandise';
 
 const purchaseBtnClasses = 'mx-[8%] select-none w-[90%] text-white font-bold py-2 px-4 rounded-full';
 const purchaseBtnColor = (status) => {
@@ -19,6 +20,7 @@ const MerchandiseDetail = () => {
   const { status } = useSession();
   const router = useRouter();
   const { sellerIsMe, id } = useFetchMerchandiseInfo();
+  const { deleteMerchandise } = useDeleteMerchandise(id);
 
   return (
     <>
@@ -34,7 +36,7 @@ const MerchandiseDetail = () => {
         </ButtonComponent>
         <ButtonComponent
           className={`${status === 'authenticated' && sellerIsMe ? 'mt-3' : 'hidden'} ${purchaseBtnClasses} ${deleteBtnColor}`}
-          onClick={() => {}}
+          onClick={() => { deleteMerchandise() }}
         >
           削除する
         </ButtonComponent>

@@ -1,6 +1,6 @@
-import NextAuth from "next-auth"
+import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google';
-import axios from "../../../utils/axios";
+import axios from '../../../utils/lib/axios';
 
 const nextAuthFunctionResult = NextAuth({
     providers: [

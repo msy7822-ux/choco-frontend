@@ -111,7 +111,7 @@ export const EditMerchandiseFormsComponent = ({ className }) => {
 
       <div className='mt-6'>
         <ButtonComponent
-          // onClick={() => {createMerchandise()}}
+          // onClick={() => {()}}
           className='bg-blue-500 select-none w-[82%] text-white font-bold py-2 px-4 rounded-full'
         >
           更新する

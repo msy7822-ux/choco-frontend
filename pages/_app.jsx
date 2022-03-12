@@ -1,10 +1,11 @@
+import 'tailwindcss/tailwind.css';
 import '../styles/globals.css'
 import { SessionProvider } from "next-auth/react";
 import { getSession } from 'next-auth/react';
 import { ApolloProvider } from "@apollo/client";
 import { apolloClient, doPersistCache } from '../apollo/config';
-import 'tailwindcss/tailwind.css';
 import { ContextProviders } from '../Contexts/ContextProviders';
+import { RecoilRoot } from 'recoil';
 
 function MyApp({ Component, pageProps, session }) {
   console.log('ログイン情報', session);
@@ -19,7 +20,9 @@ function MyApp({ Component, pageProps, session }) {
     <SessionProvider session={session}>
       <ApolloProvider client={apolloClient}>
         <ContextProviders>
-          <Component {...pageProps} />
+          <RecoilRoot>
+            <Component {...pageProps} />
+          </RecoilRoot>
         </ContextProviders>
       </ApolloProvider>
     </SessionProvider>

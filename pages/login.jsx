@@ -3,6 +3,8 @@ import { signIn } from 'next-auth/react';
 import { Box, Button } from '@mui/material';
 import { FcGoogle } from 'react-icons/fc';
 import { AppIconComponent } from '../components/molecules/AppIconComponent';
+import { LabelTextComponent } from '../components/atoms/LabelTextComponent';
+import { LinkComponent } from '../components/atoms/LinkComponent';
 import HtmlHeadComponent from '../components/atoms/HtmlHeadComponent';
 
 export const iconStyle = {
@@ -60,6 +62,14 @@ const Login = () => {
             </Box>
             Googleでログインする
           </Button>
+
+          <br />
+          <LinkComponent href='/'>
+            <LabelTextComponent
+              text='出品商品を確認する'
+              className='inline-block mt-5 text-[#848484] border-b'
+            />
+          </LinkComponent>
         </Box>
       </>
   );
