@@ -1,7 +1,5 @@
 // ====== React Hooks =======
-import { useState, useRef, useContext } from 'react';
-import { useSession } from 'next-auth/react';
-import { useMutation } from '@apollo/client';
+import { useContext, useEffect } from 'react';
 // ====== Contexts =======
 import { MerchandiseImagesContext } from '../../Contexts/MerchandiseImageProvider';
 import { MerchandiseIsInvalidContext } from '../../Contexts/MerchandiseIsInvalidProvider';
@@ -14,10 +12,8 @@ import { TextareaComponent } from '../atoms/TextareaComponent';
 import { PriceInputFieldComponent } from './PriceInputFieldComponent';
 import { ButtonComponent } from '../atoms/ButtonComponent';
 import { LabelTextComponent } from '../atoms/LabelTextComponent';
-// ====== Graphql Queries ======
-import { CREATE_MERCHANDISE } from '../../apollo/queries/create_merchandise_mutation';
 // ====== functions ======
-import { useCreateMerchandise } from '../../hooks/useCreateMerchandise';
+import { useEditMerchandise } from '../../hooks/useEditMerchandise';
 import { confirmInvalidFormElement } from '../../utils/functions/confirmInvalidFormElement';
 import { useFetchMerchandiseInfo } from '../../hooks/useFetchMerchandiseInfo';
 import {
@@ -28,12 +24,21 @@ import {
   handleChangePrice,
 } from '../../utils/functions/onChangeCallbacks/listingFormsComponentFunctions';
 
+import {
+  departmentState,
+  conditionState,
+  titleState,
+  descriptionState,
+  priceState,
+} from '../../utils/lib/recoil/atoms/atoms';
+import { useRecoilState } from 'recoil';
+
 export const EditMerchandiseFormsComponent = ({ className }) => {
-  const { status: loginStatus } = useSession();
   const { images } = useContext(MerchandiseImagesContext)
-  const { setIsInvalid, setDetails, details } = useContext(MerchandiseIsInvalidContext);
+  const { details } = useContext(MerchandiseIsInvalidContext);
 
   const {
+    id: merchandiseId,
     department,
     condition: conditionVal,
     title: titleVal,
@@ -41,16 +46,21 @@ export const EditMerchandiseFormsComponent = ({ className }) => {
     price: priceVal
   } = useFetchMerchandiseInfo();
 
-  const [createMerchandiseMutation] = useMutation(CREATE_MERCHANDISE)
+  const [departmentId, setDepartmentId] = useRecoilState(departmentState);
+  const [condition, setCondition] = useRecoilState(conditionState);
+  const [title, setTitle] = useRecoilState(titleState);
+  const [description, setDescription] = useRecoilState(descriptionState);
+  const [price, setPrice] = useRecoilState(priceState);
 
-  const [departmentId, setDepartmentId] = useState(department?.id);
-  const [condition, setCondition] = useState(conditionVal);
-  const [title, setTitle] = useState(titleVal);
-  const [description, setDescription] = useState(descriptionVal);
-  const [price, setPrice] = useState(priceVal);
-  const publicStatus = useRef(null);
+  useEffect(() => {
+    setDepartmentId(department?.id);
+    setCondition(conditionVal);
+    setTitle(titleVal);
+    setDescription(descriptionVal);
+    setPrice(priceVal);
+  }, [department, conditionVal, titleVal, descriptionVal, priceVal]);
 
-  const { createMerchandise } = useCreateMerchandise(title, description, price, condition, departmentId, publicStatus,images, loginStatus, setIsInvalid, setDetails, createMerchandiseMutation);
+  const { editMerchandise } = useEditMerchandise();
 
   return (
     <div className={`text-center ${className || ''}`}>
@@ -63,7 +73,7 @@ export const EditMerchandiseFormsComponent = ({ className }) => {
         className={`text-left mx-[10%] mt-6 w-[80%] ${confirmInvalidFormElement(details, '学部') ? 'text-[#dd2828]' : 'text-[#818181]'}`}
       />
       <DepartmentSelectBoxComponent
-        value={parseInt(departmentId, 10)}
+        value={departmentId}
         onChange={(event) => handleChangeDepartment(event, setDepartmentId)}
         className='form-select m-auto w-[80%] text-[#5e5d5d] block appearance-none bg-white border border-[#818181] px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
       />
@@ -111,7 +121,7 @@ export const EditMerchandiseFormsComponent = ({ className }) => {
 
       <div className='mt-6'>
         <ButtonComponent
-          // onClick={() => {()}}
+          onClick={() => { editMerchandise(merchandiseId, title, description, price, condition, departmentId, images) }}
           className='bg-blue-500 select-none w-[82%] text-white font-bold py-2 px-4 rounded-full'
         >
           更新する

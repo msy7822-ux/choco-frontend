@@ -11,14 +11,14 @@ export const MerchandiseIsInvalidProvider = ({ children }) => {
 
   // マウント時とアンマウント時にstateを元に戻す
   useLayoutEffect(() => {
-    if (router.pathname === '/listing') {
+    if (router.pathname === '/listing' || router.pathname === '/merchandises/[id]/edit') {
       setIsInvalid(false);
       setNotFoundLogin(false);
       return;
     }
 
     return () => {
-      if (router.pathname === '/listing') {
+      if (router.pathname === '/listing' || router.pathname === '/merchandises/[id]/edit') {
         setIsInvalid(false);
         setNotFoundLogin(false);
         return;

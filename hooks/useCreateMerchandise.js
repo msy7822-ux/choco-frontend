@@ -29,7 +29,7 @@ export const useCreateMerchandise = (
     if (status === 'unauthenticated' || status !== 'authenticated') {
       returnToTop();
       setNotFoundLogin(true);
-      router.push('/login')
+      router.push('/login');
       return;
     }
 

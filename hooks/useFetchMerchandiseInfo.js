@@ -19,6 +19,7 @@ export const useFetchMerchandiseInfo = () => {
 
   const { loading: merchandiseLoading, data, error } = useQuery(MERCHANDISE_DETAIL, {
     variables: { id: merchandiseId },
+    fetchPolicy: 'no-cache',
     ssr: true,
     client: apolloSsrClient,
     onCompleted: (data) => {
