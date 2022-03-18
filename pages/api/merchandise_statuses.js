@@ -5,4 +5,4 @@ export const merchandiseStatuses = [
   { id: 4, ja: 'やや傷や汚れあり' },
   { id: 5, ja: '傷や汚れあり' },
   { id: 6, ja: '全体的に状態が悪い' },
-]
+];

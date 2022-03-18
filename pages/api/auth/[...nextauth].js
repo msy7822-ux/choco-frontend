@@ -1,38 +1,45 @@
-import NextAuth from "next-auth"
+import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google';
-import axios from "../../../utils/axios";
+import axios from '../../../utils/lib/axios';
 
-export default NextAuth({
-  providers: [
-    GoogleProvider({
-      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET
-    }),
-  ],
-
-  secret: process.env.NEXTAUTH_SECRET,
-
-  callbacks: {
-    redirect() {
-      return '/';
+const nextAuthFunctionResult = NextAuth({
+    providers: [
+      GoogleProvider({
+        clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+        clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET
+      }),
+    ],
+    session: {
+      strategy: 'jwt',
     },
-    async jwt({ account, token }) {
-      if (account) {
-        token.id_token = account.id_token
-      }
-      return token;
+    jwt: {
+      // detail -> https://next-auth.js.org/configuration/options
+      maxAge: 60 * 60 * 24 * 30,
     },
-    async session({ session, token }) {
-      session.token = token;
-      console.log('session info ', session);
-      await axios.post('/users', { params: { session: session } }, {
-        headers: {
-          Authorization: token?.id_token
+    secret: process.env.NEXTAUTH_SECRET,
+    callbacks: {
+      async jwt({ account, token }) {
+        if (account) {
+          token.id_token = account.id_token
         }
-      });
+        return token;
+      },
+      async session({ session, token }) {
+        session.token = token;
+        console.log('session info ', session);
+        await axios.post('/users', { params: { session: session } }, {
+          headers: {
+            Authorization: token?.id_token
+          }
+        });
 
-      return session;
+        return session;
+      },
+      redirect() {
+        return '/';
+      }
     }
-  }
 });
 
+
+export default nextAuthFunctionResult;

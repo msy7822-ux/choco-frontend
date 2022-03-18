@@ -2,12 +2,26 @@
 import { signIn } from 'next-auth/react';
 import { Box, Button } from '@mui/material';
 import { FcGoogle } from 'react-icons/fc';
-import HeadComponent from '../components/HeadComponent';
+import { AppIconComponent } from '../components/molecules/AppIconComponent';
+import { LabelTextComponent } from '../components/atoms/LabelTextComponent';
+import { LinkComponent } from '../components/atoms/LinkComponent';
+import HtmlHeadComponent from '../components/atoms/HtmlHeadComponent';
+
+export const iconStyle = {
+  height: '50px',
+  marginTop: '11px',
+}
+
+export const titleStyle = {
+  fontSize: '3rem',
+  color: '#848484',
+  marginLeft: '7px',
+};
 
 const Login = () => {
   return (
       <>
-        <HeadComponent />
+        <HtmlHeadComponent />
         <Box sx={{mt: '10rem', textAlign: 'center'}}>
           <Box
             sx={{
@@ -18,28 +32,10 @@ const Login = () => {
           >
             学生のためのフリマサイト
           </Box>
-          <Box sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            mt: '3rem'
-          }}>
-            <Box sx={{mt: 1, mr: 1}}>
-              <img
-                style={{ height: 60 }}
-                src="/danball_icon.svg"
-                alt="アイコン"
-              />
-            </Box>
-            <Box
-              sx={{
-                fontSize: '4rem',
-                fontFamily: 'Quando',
-                color: '#848484'
-              }}
-            >
-              Choco
-          </Box>
-          </Box>
+          <AppIconComponent
+            titleClasses='text-[3rem] text-[#848484] font-serif'
+            iconClasses='h-[50px] mt-[11px] mr-[10px]'
+          />
           <Box
             sx={{
               fontSize: '1.1rem',
@@ -66,6 +62,14 @@ const Login = () => {
             </Box>
             Googleでログインする
           </Button>
+
+          <br />
+          <LinkComponent href='/'>
+            <LabelTextComponent
+              text='出品商品を確認する'
+              className='inline-block mt-5 text-[#848484] border-b'
+            />
+          </LinkComponent>
         </Box>
       </>
   );

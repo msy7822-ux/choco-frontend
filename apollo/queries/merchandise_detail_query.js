@@ -7,15 +7,17 @@ export const MERCHANDISE_DETAIL = gql`
       title,
       description,
       price,
+      condition,
       seller {
         id,
         email
       },
       dividedDepartment {
         department {
+          id,
           name
         }
-      }
+      },
       merchandiseImages {
         id,
         url,
