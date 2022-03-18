@@ -1,6 +1,6 @@
 import { departments } from '../../pages/api/departments';
 import { SelectTagComponent } from '../atoms/SelectTagComponent';
-import { OptionComponent } from '../atoms/optionComponent';
+import { OptionComponent } from '../atoms/OptionComponent';
 import { FormLabelComponent } from '../atoms/FormLabelComponent';
 
 export const DepartmentSelectBoxComponent = ({ className, onChange, value }) => {
